@@ -379,9 +379,18 @@ form#formData {
   font-size: 14px;
 }
 
-.input-group select option {
-  background: #1e3c72;
-  color: white;
+/* Perbaikan padding khusus dropdown form agar teks tidak menabrak label */
+.input-group select {
+  padding-top: 18px !important;
+  padding-bottom: 8px !important;
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  color: #333 !important;
+}
+
+.input-group select option,
+.filter-container select option {
+  background-color: #ffffff !important;
+  color: #333 !important;
 }
 
 .input-group label {
@@ -446,6 +455,11 @@ form#formData button[type="submit"]:hover {
   background: rgba(255, 255, 255, 0.15);
   color: white;
   height: 40px;
+}
+
+.filter-container select {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  color: #333 !important;
 }
 
 .filter-container input[type="date"]::-webkit-calendar-picker-indicator {
@@ -587,16 +601,4 @@ tr:hover {
   .filter-container {
     grid-template-columns: 1fr;
   }
-}
-/* Memperbaiki warna background dan teks dropdown agar jelas */
-.input-group select,
-.filter-container select {
-  background-color: rgba(255, 255, 255, 0.9) !important;
-  color: #333 !important;
-}
-
-.input-group select option,
-.filter-container select option {
-  background-color: #ffffff !important;
-  color: #333 !important;
 }
