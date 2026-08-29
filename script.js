@@ -319,7 +319,7 @@ if (formPresensi) {
         });
 
         if (sudahAbsenMingguIni) {
-            alert(`NIU ${niu} untuk kelas ${kelas} sudah pernah melakukan presensi pada minggu ini.`);
+            alert(`NIU ${niu} untuk kelas ${kelas} sudah 2x melakukan peminjaman alat pada minggu ini.`);
             return;
         }
 
@@ -340,7 +340,7 @@ if (formPresensi) {
             })
         });
         
-        alert("Presensi berhasil dikirim!");
+        alert("Peminjaman diterima!");
         formPresensi.reset(); 
     });
 }
