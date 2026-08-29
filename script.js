@@ -264,7 +264,8 @@ window.sortTable = function(field) {
         "NIU": "niu",
         "Kelas": "kelas",
         "Kode": "kodeJudul",
-        "Waktu": "waktu"
+        "WaktuPinjam": "waktuPinjamSort",
+        "WaktuRealtime": "waktuOriginal"
     };
 
     let key = map[field];
@@ -328,7 +329,7 @@ if (formPresensi) {
             }
         }
 
-        const waktuSubmit = new Date(`${tanggalPinjam}T${waktuMulai}:00`);
+        const waktuSubmit = new Date(); // Waktu Realtime pengumpulan data
         const startCurrentWeek = getStartOfWeek(waktuSubmit, kelas);
 
         // Validasi Maksimal 2x Peminjaman dalam Seminggu
@@ -356,8 +357,17 @@ if (formPresensi) {
             tanggalPinjam,
             waktuMulai,
             waktuSelesai,
+            waktuPinjamSort: `${tanggalPinjam} ${waktuMulai}`,
             waktuOriginal: waktuSubmit.toISOString(),
-            waktu: `${tanggalPinjam} (${waktuMulai} - ${waktuSelesai})`
+            waktuRealtime: waktuSubmit.toLocaleString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour12: true
+            })
         });
         
         alert("Peminjaman diterima!");
@@ -438,17 +448,23 @@ function renderTablePresensi() {
         : currentData.slice(start, end);
 
     paginatedData.forEach((item) => {
-        let waktuDisplay = item.waktu;
+        let waktuPinjamDisplay = "-";
         if (item.tanggalPinjam && item.waktuMulai && item.waktuSelesai) {
-            waktuDisplay = `${item.tanggalPinjam} (${item.waktuMulai} - ${item.waktuSelesai})`;
+            waktuPinjamDisplay = `${item.tanggalPinjam} (${item.waktuMulai} - ${item.waktuSelesai})`;
+        } else if (item.waktu) {
+            waktuPinjamDisplay = item.waktu;
         }
+
+        let waktuRealtimeDisplay = item.waktuRealtime || item.waktu || "-";
+
         let row = `
             <tr>
                 <td>${item.nama}</td>
                 <td>${item.niu}</td>
                 <td>${item.kelas}</td>
                 <td>${item.kodeJudul}</td>
-                <td>${waktuDisplay}</td>
+                <td>${waktuPinjamDisplay}</td>
+                <td>${waktuRealtimeDisplay}</td>
             </tr>
         `;
         table.innerHTML += row;
@@ -504,13 +520,18 @@ window.downloadExcel = function () {
         return;
     }
 
-    let csv = "Nama,NIU,Kelas,Judul,Waktu Peminjaman\n";
+    let csv = "Nama,NIU,Kelas,Judul,Waktu Peminjaman,Waktu Pengumpulan (Realtime)\n";
     currentData.forEach(item => {
-        let waktuDisplay = item.waktu;
+        let waktuPinjamDisplay = "-";
         if (item.tanggalPinjam && item.waktuMulai && item.waktuSelesai) {
-            waktuDisplay = `${item.tanggalPinjam} (${item.waktuMulai} - ${item.waktuSelesai})`;
+            waktuPinjamDisplay = `${item.tanggalPinjam} (${item.waktuMulai} - ${item.waktuSelesai})`;
+        } else if (item.waktu) {
+            waktuPinjamDisplay = item.waktu;
         }
-        csv += `${item.nama},${item.niu},${item.kelas},${item.kodeJudul || ""},"${waktuDisplay}"\n`;
+
+        let waktuRealtimeDisplay = item.waktuRealtime || item.waktu || "-";
+
+        csv += `${item.nama},${item.niu},${item.kelas},${item.kodeJudul || ""},"${waktuPinjamDisplay}","${waktuRealtimeDisplay}"\n`;
     });
 
     const blob = new Blob([csv], { type: "text/csv" });
