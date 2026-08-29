@@ -333,25 +333,6 @@ body::before {
   font-size: 1.5rem;
 }
 
-.btn-logout-fixed {
-  position: absolute;
-  top: -15px;
-  right: 10px;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(45deg, #ff4b2b, #ff416c);
-  color: white;
-  cursor: pointer;
-  z-index: 10;
-  transition: 0.3s;
-  font-size: 0.85rem;
-}
-
-.btn-logout-fixed:hover {
-  transform: scale(1.05);
-}
-
 form#formData {
   max-width: 600px;
   margin: 0 auto;
@@ -379,18 +360,11 @@ form#formData {
   font-size: 14px;
 }
 
-/* Perbaikan padding khusus dropdown form agar teks tidak menabrak label */
-.input-group select {
-  padding-top: 18px !important;
-  padding-bottom: 8px !important;
-  background-color: rgba(255, 255, 255, 0.9) !important;
-  color: #333 !important;
-}
-
+/* Dropdown pilihan opsi dengan tema gelap transparan */
 .input-group select option,
 .filter-container select option {
-  background-color: #ffffff !important;
-  color: #333 !important;
+  background: #1e3c72 !important;
+  color: white !important;
 }
 
 .input-group label {
@@ -455,11 +429,6 @@ form#formData button[type="submit"]:hover {
   background: rgba(255, 255, 255, 0.15);
   color: white;
   height: 40px;
-}
-
-.filter-container select {
-  background-color: rgba(255, 255, 255, 0.9) !important;
-  color: #333 !important;
 }
 
 .filter-container input[type="date"]::-webkit-calendar-picker-indicator {
