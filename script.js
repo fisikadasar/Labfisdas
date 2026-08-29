@@ -410,7 +410,7 @@ function renderTablePresensi() {
     if (!table) return;
     table.innerHTML = "";
 
-    const searchInputEl = document.getElementById("searchPresensiInput");
+    const searchInputEl = document.getElementById("searchPresensiInput") || document.getElementById("searchInput");
     const filterKodeEl = document.getElementById("filterKode");
     const filterTanggalEl = document.getElementById("filterTanggal");
 
