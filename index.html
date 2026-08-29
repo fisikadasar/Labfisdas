@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Fisika Dasar</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="logo.png">
+</head>
+<body>
+
+<div class="dashboard-container" id="dashboardContainer">
+        <!-- Sidebar Samping -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>Lab Fisika Dasar</h2>
+                <button class="close-btn" id="closeBtn">&times;</button>
+            </div>
+            <ul class="sidebar-menu">
+                <!-- 1. Menu Semester Gasal (Paling Atas) -->
+                <li class="has-submenu open">
+                    <a href="#" class="menu-toggle">Semester Gasal</a>
+                    <ul class="submenu">
+                        <li><a href="#" class="nav-link active" data-page="gasal-modul">Modul</a></li>
+                        <li><a href="#" class="nav-link" data-page="gasal-jadwal">Schedule</a></li>
+                    </ul>
+                </li>
+                <!-- 2. Menu Semester Genap -->
+                <li class="has-submenu open">
+                    <a href="#" class="menu-toggle">Semester Genap</a>
+                    <ul class="submenu">
+                        <li><a href="#" class="nav-link" data-page="genap-modul">Modul</a></li>
+                        <li><a href="#" class="nav-link" data-page="genap-jadwal">Schedule</a></li>
+                    </ul>
+                </li>
+                <!-- 3. Menu Peminjaman Alat -->
+                <li><a href="#" class="nav-link" data-page="peminjaman-alat">Peminjaman Alat</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-navbar">
+                <button class="menu-btn" id="menuBtn" title="Buka/Tutup Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <h2 id="pageTitle">Modul Semester Gasal</h2>
+            </header>
+
+            <div class="content-body">
+                
+                <!-- 1. SEMESTER GASAL - MODUL (DEFAULT AWAL) -->
+                <section id="view-gasal-modul" class="page-view active">
+                    <div class="header-intro">
+                        <h1>Modul Semester Gasal</h1>
+                        <p>Silakan pilih kategori kelas untuk melihat daftar modul pembelajaran.</p>
+                    </div>
+                    <div class="category-grid">
+                        <div class="category-card">
+                            <h3>Kelas Reguler</h3>
+                            <p>Kumpulan modul pembelajaran Gasal untuk kelas reguler.</p>
+                            <a href="#" class="btn-access open-category" data-semester="gasal" data-category="reguler">Open</a>
+                        </div>
+                        <div class="category-card">
+                            <h3>Kelas IUP (International)</h3>
+                            <p>Kumpulan modul pembelajaran Gasal untuk kelas IUP.</p>
+                            <a href="#" class="btn-access open-category" data-semester="gasal" data-category="iup">Open</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- HALAMAN LIST MODUL (Bersama) -->
+                <section id="view-modul-list" class="page-view">
+                    <div class="header-intro">
+                        <button class="btn-back" id="backToBeranda">&larr; Kembali ke Pilihan Kategori</button>
+                        <h1 id="modulListHeading">Daftar Modul</h1>
+                        <p id="modulListSub">Pilih modul di bawah ini untuk mengunduh file PDF.</p>
+                        <div class="search-box">
+                            <input type="text" id="searchModulInput" placeholder="Cari judul modul atau materi...">
+                        </div>
+                    </div>
+                    <div class="module-grid" id="moduleContainer"></div>
+                </section>
+
+                <!-- 2. SEMESTER GASAL - SCHEDULE -->
+                <section id="view-gasal-jadwal" class="page-view">
+                    <div class="header-intro">
+                        <h1>Schedule Semester Gasal</h1>
+                        <p>Silakan pilih kategori kelas untuk melihat jadwal PDF Semester Gasal.</p>
+                    </div>
+                    <div class="category-grid">
+                        <div class="category-card">
+                            <h3>Kelas Reguler</h3>
+                            <p>Unduh dokumen PDF jadwal Semester Gasal kelas reguler.</p>
+                            <a href="jadwal-gasal-reguler.pdf" class="btn-access" download>Download PDF</a>
+                        </div>
+                        <div class="category-card">
+                            <h3>Kelas IUP</h3>
+                            <p>Unduh dokumen PDF jadwal Semester Gasal kelas IUP.</p>
+                            <a href="jadwal-gasal-iup.pdf" class="btn-access" download>Download PDF</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. SEMESTER GENAP - MODUL -->
+                <section id="view-genap-modul" class="page-view">
+                    <div class="header-intro">
+                        <h1>Modul Semester Genap</h1>
+                        <p>Silakan pilih kategori kelas untuk melihat daftar modul pembelajaran.</p>
+                    </div>
+                    <div class="category-grid">
+                        <div class="category-card">
+                            <h3>Kelas Reguler</h3>
+                            <p>Kumpulan modul pembelajaran Genap untuk kelas reguler.</p>
+                            <a href="#" class="btn-access open-category" data-semester="genap" data-category="reguler">Open</a>
+                        </div>
+                        <div class="category-card">
+                            <h3>Kelas IUP (International)</h3>
+                            <p>Kumpulan modul pembelajaran Genap untuk kelas IUP.</p>
+                            <a href="#" class="btn-access open-category" data-semester="genap" data-category="iup">Open</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. SEMESTER GENAP - SCHEDULE -->
+                <section id="view-genap-jadwal" class="page-view">
+                    <div class="header-intro">
+                        <h1>Schedule Semester Genap</h1>
+                        <p>Silakan pilih kategori kelas untuk melihat jadwal PDF Semester Genap.</p>
+                    </div>
+                    <div class="category-grid">
+                        <div class="category-card">
+                            <h3>Kelas Reguler</h3>
+                            <p>Jadwal Semester Genap kelas reguler.</p>
+                            <a href="Kalender1.pdf" class="btn-access" download>Download PDF</a>
+                        </div>
+                        <div class="category-card">
+                            <h3>Kelas IUP</h3>
+                            <p>Jadwal Semester Genap kelas IUP.</p>
+                            <a href="Schedule1.pdf" class="btn-access" download>Download PDF</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. PEMINJAMAN ALAT (PRESENSI) -->
+                <section id="view-peminjaman-alat" class="page-view">
+                    <button class="btn-logout-fixed" onclick="logout()">Logout</button>
+                    
+                    <div class="header-presensi-title">
+                        <h2>Presensi Pengambilan Data</h2>
+                        <p>Silakan isi form di bawah ini untuk melakukan presensi.</p>
+                    </div>
+
+                    <form id="formData">
+                        <div class="input-group">
+                            <input type="text" id="Nama" required>
+                            <label>Nama</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="text" id="NIU" required>
+                            <label>NIU</label>
+                        </div>
+
+                        <div class="input-group">
+                            <select id="Kelas" required>
+                                <option value="" disabled selected hidden></option>
+                                <option>Fisika</option>
+                                <option>Geofisika</option>
+                                <option>IUP Physics</option>
+                            </select>
+                            <label>Kelas</label>
+                        </div>
+
+                        <div class="input-group">
+                            <select id="KodeJudul" required>
+                                <option value="" disabled selected hidden></option>
+                                <option>Percepatan Gravitasi</option>
+                                <option>Viskositas</option>
+                                <option>Hukum Boyle</option>
+                                <option>Pendinginan Air</option>
+                                <option>Getaran Teredam</option>
+                                <option>Konstanta Pegas</option>
+                                <option>Aliran Air Dalam Pipa Kapiler</option>
+                                <option>Osilasi Batang</option>
+                                <option>Kesetaraan Kalor-Listrik</option>
+                                <option>Osiloskop</option>
+                                <option>Gravitational Acceleration</option>
+                                <option>VISCOSITY OF LIQUID</option>
+                                <option>Boyle’s Law</option>
+                                <option>Cooling of water</option>
+                                <option>Rod Oscillation</option>
+                                <option>OSCILLOSCOPE</option>
+                            </select>
+                            <label>Judul</label>
+                        </div>
+
+                        <button type="submit">Kirim</button>
+                    </form>
+
+                    <h3 class="presensi-subtitle">Data Terkumpul</h3>
+                    <div class="table-wrapper">
+                        <div class="filter-container">
+                            <input type="text" id="searchPresensiInput" placeholder="🔍 Cari Nama / NIU / Kelas...">
+
+                            <select id="filterKode">
+                                <option value="">Semua Judul</option>
+                                <option>Percepatan Gravitasi</option>
+                                <option>Viskositas</option>
+                                <option>Hukum Boyle</option>
+                                <option>Pendinginan Air</option>
+                                <option>Getaran Teredam</option>
+                                <option>Konstanta Pegas</option>
+                                <option>Aliran Air Dalam Pipa Kapiler</option>
+                                <option>Osilasi Batang</option>
+                                <option>Kesetaraan Kalor-Listrik</option>
+                                <option>Osiloskop</option>
+                                <option>Gravitational Acceleration</option>
+                                <option>VISCOSITY OF LIQUID</option>
+                                <option>Boyle’s Law</option>
+                                <option>Cooling of water</option>
+                                <option>Rod Oscillation</option>
+                                <option>OSCILLOSCOPE</option>
+                            </select>
+
+                            <input type="date" id="filterTanggal">
+
+                            <select id="rowsPerPage">
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="all">Semua</option>
+                            </select>
+
+                            <button class="btn-excel" onclick="downloadExcel()">⬇ Excel</button>
+                        </div>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th onclick="sortTable('Nama')">Nama</th>
+                                    <th onclick="sortTable('NIU')">NIU</th>
+                                    <th onclick="sortTable('Kelas')">Kelas</th>
+                                    <th onclick="sortTable('Kode')">Kode</th>
+                                    <th onclick="sortTable('Waktu')">Waktu</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataTable"></tbody>
+                        </table>
+                        <div id="pagination" class="pagination"></div>
+                        <button id="btnHapusSemua" class="btn-hapus-semua" onclick="hapusSemua()" style="display: none;">
+                            🗑 Hapus Semua
+                        </button>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
