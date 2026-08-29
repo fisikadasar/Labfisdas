@@ -588,3 +588,15 @@ tr:hover {
     grid-template-columns: 1fr;
   }
 }
+/* Memperbaiki warna background dan teks dropdown agar jelas */
+.input-group select,
+.filter-container select {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  color: #333 !important;
+}
+
+.input-group select option,
+.filter-container select option {
+  background-color: #ffffff !important;
+  color: #333 !important;
+}
