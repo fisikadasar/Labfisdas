@@ -91,7 +91,7 @@ const schedulesData = {
     },
     genap: {
         fisika: [
-            { title: "Kalender Kegiatan", description: "Dokumen kalender kegiatan akademik Semester Gasal Kelas Fisika.", link: "Kalender1.pdf" },
+            { title: "Kalender Kegiatan", description: "Dokumen kalender kegiatan akademik Semester Genap Kelas Fisika.", link: "Kalender1.pdf" },
             { title: "Pertemuan ke-1", description: "Jadwal pertemuan pertama kelas Fisika.", link: "Kalender1.pdf" },
             { title: "Pertemuan ke-2", description: "Jadwal pertemuan kedua kelas Fisika.", link: "Kalender1.pdf" },
             { title: "Pertemuan ke-3", description: "Jadwal pertemuan ketiga kelas Fisika.", link: "Kalender1.pdf" },
@@ -100,7 +100,7 @@ const schedulesData = {
             { title: "Pertemuan ke-6", description: "Jadwal pertemuan keenam kelas Fisika.", link: "Kalender1.pdf" }
         ],
         geofisika: [
-            { title: "Kalender Kegiatan", description: "Dokumen kalender kegiatan akademik Semester Gasal Kelas Geofisika.", link: "Kalender1.pdf" },
+            { title: "Kalender Kegiatan", description: "Dokumen kalender kegiatan akademik Semester Genap Kelas Geofisika.", link: "Kalender1.pdf" },
             { title: "Pertemuan ke-1", description: "Jadwal pertemuan pertama kelas Geofisika.", link: "Kalender1.pdf" },
             { title: "Pertemuan ke-2", description: "Jadwal pertemuan kedua kelas Geofisika.", link: "Kalender1.pdf" },
             { title: "Pertemuan ke-3", description: "Jadwal pertemuan ketiga kelas Geofisika.", link: "Kalender1.pdf" },
@@ -109,7 +109,7 @@ const schedulesData = {
             { title: "Pertemuan ke-6", description: "Jadwal pertemuan keenam kelas Geofisika.", link: "Kalender1.pdf" }
         ],
         iup: [
-            { title: "Schedule", description: "Academic calendar for Gasal IUP semester.", link: "Schedule1.pdf" },
+            { title: "Schedule", description: "Academic calendar for Genap IUP semester.", link: "Schedule1.pdf" },
             { title: "Session 1", description: "First meeting schedule and details.", link: "Schedule1.pdf" },
             { title: "Session 2", description: "Second meeting schedule and details.", link: "Schedule1.pdf" },
             { title: "Session 3", description: "Third meeting schedule and details.", link: "Schedule1.pdf" },
@@ -440,7 +440,7 @@ if (formPresensi) {
         const waktuMulai = document.getElementById("waktuMulai").value;
         const waktuSelesai = document.getElementById("waktuSelesai").value;
 
-        // Validasi Durasi Maksimal 2 Jam (120 Menit)
+        // 1. Validasi Durasi Maksimal 2 Jam (120 Menit)
         if (waktuMulai && waktuSelesai) {
             const [jamMulai, menitMulai] = waktuMulai.split(':').map(Number);
             const [jamSelesai, menitSelesai] = waktuSelesai.split(':').map(Number);
@@ -460,10 +460,10 @@ if (formPresensi) {
             }
         }
 
-        const waktuSubmit = new Date(); // Waktu Realtime pengumpulan data
+        const waktuSubmit = new Date(); 
         const startCurrentWeek = getStartOfWeek(waktuSubmit, kelas);
 
-        // Validasi Maksimal 2x Peminjaman dalam Seminggu
+        // 2. Validasi Batas Maksimal 2x Peminjaman per NIU dalam Seminggu
         let jumlahPinjamMingguIni = 0;
         semuaData.forEach(item => {
             if (String(item.niu).trim() === String(niu).trim() && item.kelas === kelas) {
@@ -480,6 +480,44 @@ if (formPresensi) {
             return;
         }
 
+        // 3. Validasi Kuota Harian & Bentrok Waktu per Judul Eksperimen (Maksimal 4 peminjaman per hari / tabrakan rentang waktu)
+        const [mJam, mMenit] = waktuMulai.split(':').map(Number);
+        const [sJam, sMenit] = waktuSelesai.split(':').map(Number);
+        const reqStartMin = mJam * 60 + mMenit;
+        const reqEndMin = sJam * 60 + sMenit;
+
+        let peminjamanHariIniUntukJudul = 0;
+        let adaBentrokWaktu = false;
+
+        semuaData.forEach(item => {
+            if (item.kodeJudul === kodeJudul && item.tanggalPinjam === tanggalPinjam) {
+                peminjamanHariIniUntukJudul++;
+
+                if (item.waktuMulai && item.waktuSelesai) {
+                    const [exStartJam, exStartMenit] = item.waktuMulai.split(':').map(Number);
+                    const [exEndJam, exEndMenit] = item.waktuSelesai.split(':').map(Number);
+                    const exStartMin = exStartJam * 60 + exStartMenit;
+                    const exEndMin = exEndJam * 60 + exEndMenit;
+
+                    // Cek apakah rentang waktu bertabrakan/beririsan
+                    if (reqStartMin < exEndMin && reqEndMin > exStartMin) {
+                        adaBentrokWaktu = true;
+                    }
+                }
+            }
+        });
+
+        if (peminjamanHariIniUntukJudul >= 4) {
+            alert(`Peminjaman ditolak! Judul "${kodeJudul}" sudah mencapai batas maksimal 4 peminjaman pada tanggal ${tanggalPinjam}.`);
+            return;
+        }
+
+        if (adaBentrokWaktu) {
+            alert(`Peminjaman ditolak! Sudah ada peminjam lain pada rentang waktu ${waktuMulai} - ${waktuSelesai} di tanggal tersebut untuk judul "${kodeJudul}". Silakan pilih jam lain.`);
+            return;
+        }
+
+        // Simpan ke Firebase
         await addDoc(collection(db, "presensi"), {
             nama,
             niu,
