@@ -239,19 +239,6 @@ menuToggles.forEach(toggle => {
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, getDocs } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
 
-// 🔐 CEK LOGIN
-if (localStorage.getItem("isLogin") !== "true") {
-    window.location.href = "login.html";
-}
-
-window.logout = function() {
-    if (confirm("Yakin mau logout?")) {
-        localStorage.removeItem("isLogin");
-        localStorage.removeItem("userEmail");
-        window.location.href = "login.html";
-    }
-}
-
 const firebaseConfig = {
     apiKey: "AIzaSyDzCK1hF39bYcx16sc0hCoCfUOdhqtzeVo",
     authDomain: "presensi-app-aabb9.firebaseapp.com",
@@ -264,13 +251,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const loggedInEmail = localStorage.getItem("userEmail");
-const isAsisten = (loggedInEmail === "asisten@gmail.com");
-
-if (isAsisten) {
-    const btnHapusSemua = document.getElementById("btnHapusSemua");
-    if (btnHapusSemua) btnHapusSemua.style.display = "block";
-}
+// Fitur hapus diaktifkan langsung karena login sudah dihapus
+const isAsisten = true; 
+const btnHapusSemua = document.getElementById("btnHapusSemua");
+if (btnHapusSemua) btnHapusSemua.style.display = "block";
 
 let sortField = null;
 let sortAsc = true;
@@ -380,10 +364,6 @@ function initRealtimePresensi() {
 }
 
 window.hapusData = async function(id) {
-    if (!isAsisten) {
-        alert("Akses ditolak! Hanya Asisten yang dapat menghapus data.");
-        return;
-    }
     if (confirm("Yakin mau hapus data ini?")) {
         await deleteDoc(doc(db, "presensi", id));
         alert("Data dihapus!");
@@ -391,10 +371,6 @@ window.hapusData = async function(id) {
 };
 
 window.hapusSemua = async function() {
-    if (!isAsisten) {
-        alert("Akses ditolak! Hanya Asisten yang dapat menghapus semua data.");
-        return;
-    }
     if (confirm("Yakin mau hapus SEMUA data?")) {
         const querySnapshot = await getDocs(collection(db, "presensi"));
         const promises = querySnapshot.docs.map((docSnap) => deleteDoc(doc(db, "presensi", docSnap.id)));
@@ -463,9 +439,7 @@ function renderTablePresensi() {
         : currentData.slice(start, end);
 
     paginatedData.forEach((item) => {
-        let tombolAksi = isAsisten 
-            ? `<button class="btn-delete" onclick="hapusData('${item.id}')">❌</button>` 
-            : `<span style="color: #aaa; font-size: 12px;">-</span>`;
+        let tombolAksi = `<button class="btn-delete" onclick="hapusData('${item.id}')">❌</button>`;
 
         let row = `
             <tr>
