@@ -63,30 +63,30 @@ const schedulesData = {
     gasal: {
         fisika: [
             { title: "Kalender Kegiatan", description: "Dokumen kalender kegiatan akademik Semester Gasal Kelas Fisika.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-1", description: "Jadwal pertemuan pertama kelas Fisika.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-2", description: "Jadwal pertemuan kedua kelas Fisika.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-3", description: "Jadwal pertemuan ketiga kelas Fisika.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-4", description: "Jadwal pertemuan keempat kelas Fisika.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-5", description: "Jadwal pertemuan kelima kelas Fisika.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-6", description: "Jadwal pertemuan keenam kelas Fisika.", link: "Kalender1.pdf" }
+            { title: "Pertemuan ke-1", description: "Jadwal pertemuan pertama kelas Fisika.", link: "F1.pdf" },
+            { title: "Pertemuan ke-2", description: "Jadwal pertemuan kedua kelas Fisika.", link: "F2.pdf" },
+            { title: "Pertemuan ke-3", description: "Jadwal pertemuan ketiga kelas Fisika.", link: "F3.pdf" },
+            { title: "Pertemuan ke-4", description: "Jadwal pertemuan keempat kelas Fisika.", link: "F4.pdf" },
+            { title: "Pertemuan ke-5", description: "Jadwal pertemuan kelima kelas Fisika.", link: "F5.pdf" },
+            { title: "Pertemuan ke-6", description: "Jadwal pertemuan keenam kelas Fisika.", link: "F6.pdf" }
         ],
         geofisika: [
             { title: "Kalender Kegiatan", description: "Dokumen kalender kegiatan akademik Semester Gasal Kelas Geofisika.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-1", description: "Jadwal pertemuan pertama kelas Geofisika.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-2", description: "Jadwal pertemuan kedua kelas Geofisika.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-3", description: "Jadwal pertemuan ketiga kelas Geofisika.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-4", description: "Jadwal pertemuan keempat kelas Geofisika.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-5", description: "Jadwal pertemuan kelima kelas Geofisika.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-6", description: "Jadwal pertemuan keenam kelas Geofisika.", link: "Kalender1.pdf" }
+            { title: "Pertemuan ke-1", description: "Jadwal pertemuan pertama kelas Geofisika.", link: "G1.pdf" },
+            { title: "Pertemuan ke-2", description: "Jadwal pertemuan kedua kelas Geofisika.", link: "G2.pdf" },
+            { title: "Pertemuan ke-3", description: "Jadwal pertemuan ketiga kelas Geofisika.", link: "G3.pdf" },
+            { title: "Pertemuan ke-4", description: "Jadwal pertemuan keempat kelas Geofisika.", link: "G4.pdf" },
+            { title: "Pertemuan ke-5", description: "Jadwal pertemuan kelima kelas Geofisika.", link: "G5.pdf" },
+            { title: "Pertemuan ke-6", description: "Jadwal pertemuan keenam kelas Geofisika.", link: "G6.pdf" }
         ],
         iup: [
             { title: "Schedule", description: "Academic calendar for Gasal IUP semester.", link: "Schedule1.pdf" },
-            { title: "Session 1", description: "First meeting schedule and details.", link: "Schedule1.pdf" },
-            { title: "Session 2", description: "Second meeting schedule and details.", link: "Schedule1.pdf" },
-            { title: "Session 3", description: "Third meeting schedule and details.", link: "Schedule1.pdf" },
-            { title: "Session 4", description: "Fourth meeting schedule and details.", link: "Schedule1.pdf" },
-            { title: "Session 5", description: "Fifth meeting schedule and details.", link: "Schedule1.pdf" },
-            { title: "Session 6", description: "Sixth meeting schedule and details.", link: "Schedule1.pdf" }
+            { title: "Session 1", description: "First meeting schedule and details.", link: "P1.pdf" },
+            { title: "Session 2", description: "Second meeting schedule and details.", link: "P2.pdf" },
+            { title: "Session 3", description: "Third meeting schedule and details.", link: "P3.pdf" },
+            { title: "Session 4", description: "Fourth meeting schedule and details.", link: "P4.pdf" },
+            { title: "Session 5", description: "Fifth meeting schedule and details.", link: "P5.pdf" },
+            { title: "Session 6", description: "Sixth meeting schedule and details.", link: "P6.pdf" }
         ]
     },
     genap: {
