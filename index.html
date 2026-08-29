@@ -144,6 +144,7 @@
                         </div>
                     </div>
                 </section>
+
                 <!-- 5. PEMINJAMAN ALAT (PRESENSI) -->
                 <section id="view-peminjaman-alat" class="page-view">
                     
@@ -196,6 +197,25 @@
                             <label>Judul</label>
                         </div>
 
+                        <!-- TAMBAHAN: Tanggal Peminjaman -->
+                        <div class="input-group">
+                            <input type="date" id="tanggalPinjam" required>
+                            <label class="active-label">Tanggal Peminjaman</label>
+                        </div>
+
+                        <!-- TAMBAHAN: Jam Mulai s/d Jam Selesai Sejajar -->
+                        <div class="input-row-time" style="display: flex; gap: 10px; align-items: center; margin-top: 20px;">
+                            <div class="input-group" style="flex: 1; margin-top: 0;">
+                                <input type="time" id="waktuMulai" required>
+                                <label class="active-label">Jam Mulai</label>
+                            </div>
+                            <span style="color: white; font-weight: 500; white-space: nowrap;">s/d</span>
+                            <div class="input-group" style="flex: 1; margin-top: 0;">
+                                <input type="time" id="waktuSelesai" required>
+                                <label class="active-label">Jam Selesai</label>
+                            </div>
+                        </div>
+
                         <button type="submit">Kirim</button>
                     </form>
 
@@ -242,7 +262,7 @@
                                     <th onclick="sortTable('NIU')">NIU</th>
                                     <th onclick="sortTable('Kelas')">Kelas</th>
                                     <th onclick="sortTable('Kode')">Judul</th>
-                                    <th onclick="sortTable('Waktu')">Waktu</th>
+                                    <th onclick="sortTable('Waktu')">Waktu Peminjaman</th>
                                 </tr>
                             </thead>
                             <tbody id="dataTable"></tbody>
