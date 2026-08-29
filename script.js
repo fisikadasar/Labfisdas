@@ -439,7 +439,6 @@ function renderTablePresensi() {
         : currentData.slice(start, end);
 
     paginatedData.forEach((item) => {
-        let tombolAksi = `<button class="btn-delete" onclick="hapusData('${item.id}')">❌</button>`;
 
         let row = `
             <tr>
@@ -448,7 +447,6 @@ function renderTablePresensi() {
                 <td>${item.kelas}</td>
                 <td>${item.kodeJudul}</td>
                 <td>${item.waktu}</td>
-                <td>${tombolAksi}</td>
             </tr>
         `;
         table.innerHTML += row;
