@@ -62,22 +62,22 @@ const modulesData = {
 const schedulesData = {
     gasal: {
         reguler: [
-            { title: "Kalender Kegiatan", description: "Dokumen kalender kegiatan akademik Semester Gasal Reguler.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-1", description: "Materi dan jadwal pertemuan pertama.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-2", description: "Materi dan jadwal pertemuan kedua.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-3", description: "Materi dan jadwal pertemuan ketiga.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-4", description: "Materi dan jadwal pertemuan keempat.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-5", description: "Materi dan jadwal pertemuan kelima.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-6", description: "Materi dan jadwal pertemuan keenam.", link: "Kalender1.pdf" }
+            { title: "Kalender Kegiatan", description: "Kalender kegiatan praktikum Semester Gasal Reguler.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-1", description: "Jadwal pertemuan pertama.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-2", description: "Jadwal pertemuan kedua.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-3", description: "Jadwal pertemuan ketiga.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-4", description: "Jadwal pertemuan keempat.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-5", description: "Jadwal pertemuan kelima.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-6", description: "Jadwal pertemuan keenam.", link: "Kalender1.pdf" }
         ],
         iup: [
-            { title: "Kalender Kegiatan", description: "Academic calendar for Gasal IUP semester.", link: "Schedule1.pdf" },
-            { title: "Pertemuan ke-1", description: "First meeting schedule and details.", link: "Schedule1.pdf" },
-            { title: "Pertemuan ke-2", description: "Second meeting schedule and details.", link: "Schedule1.pdf" },
-            { title: "Pertemuan ke-3", description: "Third meeting schedule and details.", link: "Schedule1.pdf" },
-            { title: "Pertemuan ke-4", description: "Fourth meeting schedule and details.", link: "Schedule1.pdf" },
-            { title: "Pertemuan ke-5", description: "Fifth meeting schedule and details.", link: "Schedule1.pdf" },
-            { title: "Pertemuan ke-6", description: "Sixth meeting schedule and details.", link: "Schedule1.pdf" }
+            { title: "Schedule", description: "Academic calendar for Gasal IUP semester.", link: "Schedule1.pdf" },
+            { title: "Session 1", description: "First meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Session 2", description: "Second meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Session 3", description: "Third meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Session 4", description: "Fourth meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Session 5", description: "Fifth meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Session 6", description: "Sixth meeting schedule and details.", link: "Schedule1.pdf" }
         ]
     },
     genap: {
