@@ -58,17 +58,26 @@ const modulesData = {
     }
 };
 
-// --- DATA SCHEDULE (KALENDER & PERTEMUAN 1-6) ---
+// --- DATA SCHEDULE (FISIKA, GEOFISIKA, IUP - KALENDER & PERTEMUAN 1-6) ---
 const schedulesData = {
     gasal: {
-        reguler: [
-            { title: "Kalender Kegiatan", description: "Kalender kegiatan praktikum Semester Gasal Reguler.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-1", description: "Jadwal pertemuan pertama.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-2", description: "Jadwal pertemuan kedua.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-3", description: "Jadwal pertemuan ketiga.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-4", description: "Jadwal pertemuan keempat.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-5", description: "Jadwal pertemuan kelima.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-6", description: "Jadwal pertemuan keenam.", link: "Kalender1.pdf" }
+        fisika: [
+            { title: "Kalender Kegiatan", description: "Dokumen kalender kegiatan akademik Semester Gasal Kelas Fisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-1", description: "Jadwal pertemuan pertama kelas Fisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-2", description: "Jadwal pertemuan kedua kelas Fisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-3", description: "Jadwal pertemuan ketiga kelas Fisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-4", description: "Jadwal pertemuan keempat kelas Fisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-5", description: "Jadwal pertemuan kelima kelas Fisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-6", description: "Jadwal pertemuan keenam kelas Fisika.", link: "Kalender1.pdf" }
+        ],
+        geofisika: [
+            { title: "Kalender Kegiatan", description: "Dokumen kalender kegiatan akademik Semester Gasal Kelas Geofisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-1", description: "Jadwal pertemuan pertama kelas Geofisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-2", description: "Jadwal pertemuan kedua kelas Geofisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-3", description: "Jadwal pertemuan ketiga kelas Geofisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-4", description: "Jadwal pertemuan keempat kelas Geofisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-5", description: "Jadwal pertemuan kelima kelas Geofisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-6", description: "Jadwal pertemuan keenam kelas Geofisika.", link: "Kalender1.pdf" }
         ],
         iup: [
             { title: "Schedule", description: "Academic calendar for Gasal IUP semester.", link: "Schedule1.pdf" },
@@ -81,23 +90,32 @@ const schedulesData = {
         ]
     },
     genap: {
-        reguler: [
-            { title: "Kalender Kegiatan", description: "Dokumen kalender kegiatan akademik Semester Genap Reguler.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-1", description: "Materi dan jadwal pertemuan pertama.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-2", description: "Materi dan jadwal pertemuan kedua.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-3", description: "Materi dan jadwal pertemuan ketiga.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-4", description: "Materi dan jadwal pertemuan keempat.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-5", description: "Materi dan jadwal pertemuan kelima.", link: "Kalender1.pdf" },
-            { title: "Pertemuan ke-6", description: "Materi dan jadwal pertemuan keenam.", link: "Kalender1.pdf" }
+        fisika: [
+            { title: "Kalender Kegiatan", description: "Dokumen kalender kegiatan akademik Semester Gasal Kelas Fisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-1", description: "Jadwal pertemuan pertama kelas Fisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-2", description: "Jadwal pertemuan kedua kelas Fisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-3", description: "Jadwal pertemuan ketiga kelas Fisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-4", description: "Jadwal pertemuan keempat kelas Fisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-5", description: "Jadwal pertemuan kelima kelas Fisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-6", description: "Jadwal pertemuan keenam kelas Fisika.", link: "Kalender1.pdf" }
+        ],
+        geofisika: [
+            { title: "Kalender Kegiatan", description: "Dokumen kalender kegiatan akademik Semester Gasal Kelas Geofisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-1", description: "Jadwal pertemuan pertama kelas Geofisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-2", description: "Jadwal pertemuan kedua kelas Geofisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-3", description: "Jadwal pertemuan ketiga kelas Geofisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-4", description: "Jadwal pertemuan keempat kelas Geofisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-5", description: "Jadwal pertemuan kelima kelas Geofisika.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-6", description: "Jadwal pertemuan keenam kelas Geofisika.", link: "Kalender1.pdf" }
         ],
         iup: [
-            { title: "Kalender Kegiatan", description: "Academic calendar for Genap IUP semester.", link: "Schedule1.pdf" },
-            { title: "Pertemuan ke-1", description: "First meeting schedule and details.", link: "Schedule1.pdf" },
-            { title: "Pertemuan ke-2", description: "Second meeting schedule and details.", link: "Schedule1.pdf" },
-            { title: "Pertemuan ke-3", description: "Third meeting schedule and details.", link: "Schedule1.pdf" },
-            { title: "Pertemuan ke-4", description: "Fourth meeting schedule and details.", link: "Schedule1.pdf" },
-            { title: "Pertemuan ke-5", description: "Fifth meeting schedule and details.", link: "Schedule1.pdf" },
-            { title: "Pertemuan ke-6", description: "Sixth meeting schedule and details.", link: "Schedule1.pdf" }
+            { title: "Schedule", description: "Academic calendar for Gasal IUP semester.", link: "Schedule1.pdf" },
+            { title: "Session 1", description: "First meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Session 2", description: "Second meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Session 3", description: "Third meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Session 4", description: "Fourth meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Session 5", description: "Fifth meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Session 6", description: "Sixth meeting schedule and details.", link: "Schedule1.pdf" }
         ]
     }
 };
@@ -105,7 +123,7 @@ const schedulesData = {
 let currentSemester = 'gasal';
 let currentCategory = 'reguler';
 let currentScheduleSemester = 'gasal';
-let currentScheduleCategory = 'reguler';
+let currentScheduleCategory = 'fisika';
 
 // Elemen DOM Utama
 const moduleContainer = document.getElementById('moduleContainer');
@@ -200,7 +218,9 @@ openScheduleButtons.forEach(btn => {
         document.getElementById('view-schedule-list').classList.add('active');
 
         const semLabel = currentScheduleSemester === 'gasal' ? 'Semester Gasal' : 'Semester Genap';
-        const katLabel = currentScheduleCategory === 'reguler' ? 'Kelas Reguler' : 'Kelas IUP';
+        let katLabel = 'Kelas Fisika';
+        if (currentScheduleCategory === 'geofisika') katLabel = 'Kelas Geofisika';
+        else if (currentScheduleCategory === 'iup') katLabel = 'Kelas IUP';
         
         pageTitle.innerText = `Schedule ${semLabel} - ${katLabel}`;
         scheduleListHeading.innerText = `Daftar Schedule (${semLabel} / ${katLabel})`;
