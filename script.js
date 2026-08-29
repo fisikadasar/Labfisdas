@@ -480,44 +480,37 @@ if (formPresensi) {
             return;
         }
 
-        // 3. Validasi Kuota Harian & Bentrok Waktu per Judul Eksperimen (Maksimal 4 peminjaman per hari / tabrakan rentang waktu)
+        // 3. Validasi Kuota Maksimal 4 Peminjam per Rentang Waktu (Slot Jam) yang Bertabrakan untuk Judul yang Sama
         const [mJam, mMenit] = waktuMulai.split(':').map(Number);
         const [sJam, sMenit] = waktuSelesai.split(':').map(Number);
         const reqStartMin = mJam * 60 + mMenit;
         const reqEndMin = sJam * 60 + sMenit;
 
-        let peminjamanHariIniUntukJudul = 0;
-        let adaBentrokWaktu = false;
+        let jumlahPeminjamDiRentangWaktu = 0;
 
         semuaData.forEach(item => {
             if (item.kodeJudul === kodeJudul && item.tanggalPinjam === tanggalPinjam) {
-                peminjamanHariIniUntukJudul++;
-
                 if (item.waktuMulai && item.waktuSelesai) {
                     const [exStartJam, exStartMenit] = item.waktuMulai.split(':').map(Number);
                     const [exEndJam, exEndMenit] = item.waktuSelesai.split(':').map(Number);
                     const exStartMin = exStartJam * 60 + exStartMenit;
                     const exEndMin = exEndJam * 60 + exEndMenit;
 
-                    // Cek apakah rentang waktu bertabrakan/beririsan
+                    // Cek apakah rentang waktu baru bertabrakan dengan jadwal yang sudah ada
                     if (reqStartMin < exEndMin && reqEndMin > exStartMin) {
-                        adaBentrokWaktu = true;
+                        jumlahPeminjamDiRentangWaktu++;
                     }
                 }
             }
         });
 
-        if (peminjamanHariIniUntukJudul >= 4) {
-            alert(`Peminjaman ditolak! Judul "${kodeJudul}" sudah mencapai batas maksimal 4 peminjaman pada tanggal ${tanggalPinjam}.`);
+        // Batas maksimal 4 slot per rentang waktu
+        if (jumlahPeminjamDiRentangWaktu >= 4) {
+            alert(`Peminjaman ditolak! Slot untuk judul "${kodeJudul}" pada rentang waktu ${waktuMulai} - ${waktuSelesai} tanggal ${tanggalPinjam} sudah penuh (maksimal 4 peminjam). Silakan pilih rentang waktu di atas jam tersebut.`);
             return;
         }
 
-        if (adaBentrokWaktu) {
-            alert(`Peminjaman ditolak! Sudah ada peminjam lain pada rentang waktu ${waktuMulai} - ${waktuSelesai} di tanggal tersebut untuk judul "${kodeJudul}". Silakan pilih jam lain.`);
-            return;
-        }
-
-        // Simpan ke Firebase
+        // Simpan ke Firebase jika lolos semua validasi
         await addDoc(collection(db, "presensi"), {
             nama,
             niu,
