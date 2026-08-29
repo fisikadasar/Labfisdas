@@ -237,7 +237,7 @@ menuToggles.forEach(toggle => {
 
 // ================== LOGIKA PRESENSI & FIREBASE ==================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, getDocs } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDzCK1hF39bYcx16sc0hCoCfUOdhqtzeVo",
@@ -250,11 +250,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
-// Fitur hapus diaktifkan langsung karena login sudah dihapus
-const isAsisten = true; 
-const btnHapusSemua = document.getElementById("btnHapusSemua");
-if (btnHapusSemua) btnHapusSemua.style.display = "block";
 
 let sortField = null;
 let sortAsc = true;
@@ -363,22 +358,6 @@ function initRealtimePresensi() {
     });
 }
 
-window.hapusData = async function(id) {
-    if (confirm("Yakin mau hapus data ini?")) {
-        await deleteDoc(doc(db, "presensi", id));
-        alert("Data dihapus!");
-    }
-};
-
-window.hapusSemua = async function() {
-    if (confirm("Yakin mau hapus SEMUA data?")) {
-        const querySnapshot = await getDocs(collection(db, "presensi"));
-        const promises = querySnapshot.docs.map((docSnap) => deleteDoc(doc(db, "presensi", docSnap.id)));
-        await Promise.all(promises);
-        alert("Semua data berhasil dihapus!");
-    }
-};
-
 initRealtimePresensi();
 
 function renderTablePresensi() {
@@ -439,7 +418,6 @@ function renderTablePresensi() {
         : currentData.slice(start, end);
 
     paginatedData.forEach((item) => {
-
         let row = `
             <tr>
                 <td>${item.nama}</td>
