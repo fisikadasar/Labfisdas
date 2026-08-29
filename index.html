@@ -197,22 +197,23 @@
                             <label>Judul</label>
                         </div>
 
-                        <!-- TAMBAHAN: Tanggal Peminjaman -->
-                        <div class="input-group">
-                            <input type="date" id="tanggalPinjam" required>
-                            <label class="active-label">Tanggal Peminjaman</label>
+                        <!-- PERBAIKAN: Input Tanggal Tanpa Bentrok Label Floating -->
+                        <div class="input-group" style="padding-top: 15px;">
+                            <label style="position: static; font-size: 13px; color: #ddd; margin-bottom: 5px; display: block;">Tanggal Peminjaman</label>
+                            <input type="date" id="tanggalPinjam" required style="margin-top: 0;">
                         </div>
 
-                        <!-- TAMBAHAN: Jam Mulai s/d Jam Selesai Sejajar -->
-                        <div class="input-row-time" style="display: flex; gap: 10px; align-items: center; margin-top: 20px;">
-                            <div class="input-group" style="flex: 1; margin-top: 0;">
-                                <input type="time" id="waktuMulai" required>
-                                <label class="active-label">Jam Mulai</label>
-                            </div>
-                            <span style="color: white; font-weight: 500; white-space: nowrap;">s/d</span>
-                            <div class="input-group" style="flex: 1; margin-top: 0;">
-                                <input type="time" id="waktuSelesai" required>
-                                <label class="active-label">Jam Selesai</label>
+                        <!-- PERBAIKAN: Jam Mulai & Jam Selesai Sejajar Tanpa Bentrok Label Floating -->
+                        <div style="margin-top: 15px;">
+                            <label style="font-size: 13px; color: #ddd; margin-bottom: 5px; display: block;">Waktu Peminjaman (Maksimal 2 Jam)</label>
+                            <div style="display: flex; gap: 10px; align-items: center;">
+                                <div style="flex: 1;">
+                                    <input type="time" id="waktuMulai" required style="width: 100%; padding: 12px; border: none; border-radius: 8px; background: rgba(255, 255, 255, 0.2); color: white; outline: none;">
+                                </div>
+                                <span style="color: white; font-weight: 500;">s/d</span>
+                                <div style="flex: 1;">
+                                    <input type="time" id="waktuSelesai" required style="width: 100%; padding: 12px; border: none; border-radius: 8px; background: rgba(255, 255, 255, 0.2); color: white; outline: none;">
+                                </div>
                             </div>
                         </div>
 
@@ -262,7 +263,8 @@
                                     <th onclick="sortTable('NIU')">NIU</th>
                                     <th onclick="sortTable('Kelas')">Kelas</th>
                                     <th onclick="sortTable('Kode')">Judul</th>
-                                    <th onclick="sortTable('Waktu')">Waktu Peminjaman</th>
+                                    <th onclick="sortTable('WaktuPinjam')">Peminjaman</th>
+                                    <th onclick="sortTable('WaktuRealtime')">Waktu</th>
                                 </tr>
                             </thead>
                             <tbody id="dataTable"></tbody>
