@@ -58,14 +58,62 @@ const modulesData = {
     }
 };
 
+// --- DATA SCHEDULE (KALENDER & PERTEMUAN 1-6) ---
+const schedulesData = {
+    gasal: {
+        reguler: [
+            { title: "Kalender Kegiatan", description: "Dokumen kalender kegiatan akademik Semester Gasal Reguler.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-1", description: "Materi dan jadwal pertemuan pertama.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-2", description: "Materi dan jadwal pertemuan kedua.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-3", description: "Materi dan jadwal pertemuan ketiga.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-4", description: "Materi dan jadwal pertemuan keempat.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-5", description: "Materi dan jadwal pertemuan kelima.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-6", description: "Materi dan jadwal pertemuan keenam.", link: "Kalender1.pdf" }
+        ],
+        iup: [
+            { title: "Kalender Kegiatan", description: "Academic calendar for Gasal IUP semester.", link: "Schedule1.pdf" },
+            { title: "Pertemuan ke-1", description: "First meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Pertemuan ke-2", description: "Second meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Pertemuan ke-3", description: "Third meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Pertemuan ke-4", description: "Fourth meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Pertemuan ke-5", description: "Fifth meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Pertemuan ke-6", description: "Sixth meeting schedule and details.", link: "Schedule1.pdf" }
+        ]
+    },
+    genap: {
+        reguler: [
+            { title: "Kalender Kegiatan", description: "Dokumen kalender kegiatan akademik Semester Genap Reguler.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-1", description: "Materi dan jadwal pertemuan pertama.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-2", description: "Materi dan jadwal pertemuan kedua.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-3", description: "Materi dan jadwal pertemuan ketiga.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-4", description: "Materi dan jadwal pertemuan keempat.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-5", description: "Materi dan jadwal pertemuan kelima.", link: "Kalender1.pdf" },
+            { title: "Pertemuan ke-6", description: "Materi dan jadwal pertemuan keenam.", link: "Kalender1.pdf" }
+        ],
+        iup: [
+            { title: "Kalender Kegiatan", description: "Academic calendar for Genap IUP semester.", link: "Schedule1.pdf" },
+            { title: "Pertemuan ke-1", description: "First meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Pertemuan ke-2", description: "Second meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Pertemuan ke-3", description: "Third meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Pertemuan ke-4", description: "Fourth meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Pertemuan ke-5", description: "Fifth meeting schedule and details.", link: "Schedule1.pdf" },
+            { title: "Pertemuan ke-6", description: "Sixth meeting schedule and details.", link: "Schedule1.pdf" }
+        ]
+    }
+};
+
 let currentSemester = 'gasal';
 let currentCategory = 'reguler';
+let currentScheduleSemester = 'gasal';
+let currentScheduleCategory = 'reguler';
 
 // Elemen DOM Utama
 const moduleContainer = document.getElementById('moduleContainer');
+const scheduleContainer = document.getElementById('scheduleContainer');
 const searchModulInput = document.getElementById('searchModulInput');
 const pageTitle = document.getElementById('pageTitle');
 const modulListHeading = document.getElementById('modulListHeading');
+const scheduleListHeading = document.getElementById('scheduleListHeading');
 const pageViews = document.querySelectorAll('.page-view');
 const navLinks = document.querySelectorAll('.nav-link');
 
@@ -94,6 +142,31 @@ function displayModules(semester, category) {
     });
 }
 
+// Fungsi Render Schedule (Layer Baru)
+function displaySchedules(semester, category) {
+    if (!scheduleContainer) return;
+    scheduleContainer.innerHTML = '';
+    const data = schedulesData[semester][category];
+
+    if (!data || data.length === 0) {
+        scheduleContainer.innerHTML = `<div class="no-results" style="grid-column: 1/-1; text-align: center; color: #94a3b8; padding: 40px;">Schedule tidak ditemukan.</div>`;
+        return;
+    }
+
+    data.forEach(item => {
+        const card = document.createElement('div');
+        card.classList.add('module-card');
+        card.innerHTML = `
+            <div class="module-info">
+                <h3>${item.title}</h3>
+                <p>${item.description}</p>
+            </div>
+            <a href="${item.link}" class="btn-access" target="_blank">Buka PDF</a>
+        `;
+        scheduleContainer.appendChild(card);
+    });
+}
+
 // Tombol "Open" pada Kategori Modul
 const openCategoryButtons = document.querySelectorAll('.open-category');
 openCategoryButtons.forEach(btn => {
@@ -115,7 +188,28 @@ openCategoryButtons.forEach(btn => {
     });
 });
 
-// Tombol Kembali ke Kategori Berdasarkan Semester Aktif
+// Tombol "Open" pada Kategori Schedule (Layer Baru)
+const openScheduleButtons = document.querySelectorAll('.open-schedule');
+openScheduleButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentScheduleSemester = btn.getAttribute('data-semester');
+        currentScheduleCategory = btn.getAttribute('data-category');
+
+        pageViews.forEach(v => v.classList.remove('active'));
+        document.getElementById('view-schedule-list').classList.add('active');
+
+        const semLabel = currentScheduleSemester === 'gasal' ? 'Semester Gasal' : 'Semester Genap';
+        const katLabel = currentScheduleCategory === 'reguler' ? 'Kelas Reguler' : 'Kelas IUP';
+        
+        pageTitle.innerText = `Schedule ${semLabel} - ${katLabel}`;
+        scheduleListHeading.innerText = `Daftar Schedule (${semLabel} / ${katLabel})`;
+        
+        displaySchedules(currentScheduleSemester, currentScheduleCategory);
+    });
+});
+
+// Tombol Kembali ke Kategori Berdasarkan Semester Aktif (Modul)
 const backBtn = document.getElementById('backToBeranda');
 if (backBtn) {
     backBtn.addEventListener('click', () => {
@@ -128,6 +222,21 @@ if (backBtn) {
             pageTitle.innerText = "Modul Semester Genap";
         }
         if (searchModulInput) searchModulInput.value = '';
+    });
+}
+
+// Tombol Kembali ke Kategori Schedule Berdasarkan Semester Aktif
+const backScheduleBtn = document.getElementById('backToScheduleBeranda');
+if (backScheduleBtn) {
+    backScheduleBtn.addEventListener('click', () => {
+        pageViews.forEach(v => v.classList.remove('active'));
+        if (currentScheduleSemester === 'gasal') {
+            document.getElementById('view-gasal-jadwal').classList.add('active');
+            pageTitle.innerText = "Schedule Semester Gasal";
+        } else {
+            document.getElementById('view-genap-jadwal').classList.add('active');
+            pageTitle.innerText = "Schedule Semester Genap";
+        }
     });
 }
 
@@ -148,6 +257,7 @@ navLinks.forEach(link => {
         } else if (page === 'gasal-jadwal') {
             document.getElementById('view-gasal-jadwal').classList.add('active');
             pageTitle.innerText = "Schedule Semester Gasal";
+            currentScheduleSemester = 'gasal';
         } else if (page === 'genap-modul') {
             document.getElementById('view-genap-modul').classList.add('active');
             pageTitle.innerText = "Modul Semester Genap";
@@ -155,6 +265,7 @@ navLinks.forEach(link => {
         } else if (page === 'genap-jadwal') {
             document.getElementById('view-genap-jadwal').classList.add('active');
             pageTitle.innerText = "Schedule Semester Genap";
+            currentScheduleSemester = 'genap';
         } else if (page === 'peminjaman-alat') {
             document.getElementById('view-peminjaman-alat').classList.add('active');
             pageTitle.innerText = "Peminjaman Alat";
