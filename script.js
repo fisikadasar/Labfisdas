@@ -303,23 +303,48 @@ if (formPresensi) {
         const niu = document.getElementById("NIU").value;
         const kelas = document.getElementById("Kelas").value;
         const kodeJudul = document.getElementById("KodeJudul").value;
-        const waktuSubmit = new Date();
+        
+        const tanggalPinjam = document.getElementById("tanggalPinjam").value;
+        const waktuMulai = document.getElementById("waktuMulai").value;
+        const waktuSelesai = document.getElementById("waktuSelesai").value;
 
+        // Validasi Durasi Maksimal 2 Jam (120 Menit)
+        if (waktuMulai && waktuSelesai) {
+            const [jamMulai, menitMulai] = waktuMulai.split(':').map(Number);
+            const [jamSelesai, menitSelesai] = waktuSelesai.split(':').map(Number);
+
+            const totalMenitMulai = jamMulai * 60 + menitMulai;
+            const totalMenitSelesai = jamSelesai * 60 + menitSelesai;
+            const durasiMenit = totalMenitSelesai - totalMenitMulai;
+
+            if (durasiMenit <= 0) {
+                alert("Jam selesai harus lebih besar dari jam mulai!");
+                return;
+            }
+
+            if (durasiMenit > 120) {
+                alert("Peminjaman ditolak! Durasi maksimal peminjaman alat adalah 2 jam.");
+                return;
+            }
+        }
+
+        const waktuSubmit = new Date(`${tanggalPinjam}T${waktuMulai}:00`);
         const startCurrentWeek = getStartOfWeek(waktuSubmit, kelas);
 
-        let sudahAbsenMingguIni = false;
+        // Validasi Maksimal 2x Peminjaman dalam Seminggu
+        let jumlahPinjamMingguIni = 0;
         semuaData.forEach(item => {
             if (String(item.niu).trim() === String(niu).trim() && item.kelas === kelas) {
                 let waktuItem = new Date(item.waktuOriginal || item.waktu);
                 let startItemWeek = getStartOfWeek(waktuItem, kelas);
                 if (startItemWeek.getTime() === startCurrentWeek.getTime()) {
-                    sudahAbsenMingguIni = true;
+                    jumlahPinjamMingguIni++;
                 }
             }
         });
 
-        if (sudahAbsenMingguIni) {
-            alert(`NIU ${niu} untuk kelas ${kelas} sudah 2x melakukan peminjaman alat pada minggu ini.`);
+        if (jumlahPinjamMingguIni >= 2) {
+            alert(`Peminjaman ditolak! NIU ${niu} untuk kelas ${kelas} sudah mencapai batas maksimal 2x peminjaman pada minggu ini.`);
             return;
         }
 
@@ -328,16 +353,11 @@ if (formPresensi) {
             niu,
             kelas,
             kodeJudul,
+            tanggalPinjam,
+            waktuMulai,
+            waktuSelesai,
             waktuOriginal: waktuSubmit.toISOString(),
-            waktu: waktuSubmit.toLocaleString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit",
-                hour12: true
-            })
+            waktu: `${tanggalPinjam} (${waktuMulai} - ${waktuSelesai})`
         });
         
         alert("Peminjaman diterima!");
@@ -385,7 +405,7 @@ function renderTablePresensi() {
         if (kodeFilter && item.kodeJudul !== kodeFilter) return false;
 
         if (tanggalFilter) {
-            const tanggalData = new Date(item.waktuOriginal || item.waktu).toISOString().split("T")[0];
+            const tanggalData = item.tanggalPinjam || new Date(item.waktuOriginal || item.waktu).toISOString().split("T")[0];
             if (tanggalData !== tanggalFilter) return false;
         }
 
@@ -418,13 +438,17 @@ function renderTablePresensi() {
         : currentData.slice(start, end);
 
     paginatedData.forEach((item) => {
+        let waktuDisplay = item.waktu;
+        if (item.tanggalPinjam && item.waktuMulai && item.waktuSelesai) {
+            waktuDisplay = `${item.tanggalPinjam} (${item.waktuMulai} - ${item.waktuSelesai})`;
+        }
         let row = `
             <tr>
                 <td>${item.nama}</td>
                 <td>${item.niu}</td>
                 <td>${item.kelas}</td>
                 <td>${item.kodeJudul}</td>
-                <td>${item.waktu}</td>
+                <td>${waktuDisplay}</td>
             </tr>
         `;
         table.innerHTML += row;
@@ -480,9 +504,13 @@ window.downloadExcel = function () {
         return;
     }
 
-    let csv = "Nama,NIU,Kelas,Kode,Waktu\n";
+    let csv = "Nama,NIU,Kelas,Judul,Waktu Peminjaman\n";
     currentData.forEach(item => {
-        csv += `${item.nama},${item.niu},${item.kelas},${item.kodeJudul || ""},${item.waktu}\n`;
+        let waktuDisplay = item.waktu;
+        if (item.tanggalPinjam && item.waktuMulai && item.waktuSelesai) {
+            waktuDisplay = `${item.tanggalPinjam} (${item.waktuMulai} - ${item.waktuSelesai})`;
+        }
+        csv += `${item.nama},${item.niu},${item.kelas},${item.kodeJudul || ""},"${waktuDisplay}"\n`;
     });
 
     const blob = new Blob([csv], { type: "text/csv" });
@@ -490,7 +518,7 @@ window.downloadExcel = function () {
 
     const a = document.createElement("a");
     a.href = url;
-    a.download = "data_presensi.csv";
+    a.download = "data_peminjaman_alat.csv";
     a.click();
 
     window.URL.revokeObjectURL(url);
