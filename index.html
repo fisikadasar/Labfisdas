@@ -89,18 +89,18 @@
                 <section id="view-gasal-jadwal" class="page-view">
                     <div class="header-intro">
                         <h1>Schedule Semester Gasal</h1>
-                        <p>Silakan pilih kategori kelas untuk melihat jadwal PDF Semester Gasal.</p>
+                        <p>Silakan pilih kategori kelas untuk melihat jadwal Semester Gasal.</p>
                     </div>
                     <div class="category-grid">
                         <div class="category-card">
                             <h3>Kelas Reguler</h3>
-                            <p>Buka dokumen PDF jadwal Semester Gasal kelas reguler.</p>
-                            <a href="Kalender1.pdf" class="btn-access" target="_blank">Open</a>
+                            <p>Lihat kalender kegiatan dan jadwal pertemuan Gasal kelas reguler.</p>
+                            <a href="#" class="btn-access open-schedule" data-semester="gasal" data-category="reguler">Open</a>
                         </div>
                         <div class="category-card">
                             <h3>Kelas IUP</h3>
-                            <p>Buka dokumen PDF jadwal Semester Gasal kelas IUP.</p>
-                            <a href="Schedule1.pdf" class="btn-access" target="_blank">Open</a>
+                            <p>Lihat kalender kegiatan dan jadwal pertemuan Gasal kelas IUP.</p>
+                            <a href="#" class="btn-access open-schedule" data-semester="gasal" data-category="iup">Open</a>
                         </div>
                     </div>
                 </section>
@@ -129,20 +129,30 @@
                 <section id="view-genap-jadwal" class="page-view">
                     <div class="header-intro">
                         <h1>Schedule Semester Genap</h1>
-                        <p>Silakan pilih kategori kelas untuk melihat jadwal PDF Semester Genap.</p>
+                        <p>Silakan pilih kategori kelas untuk melihat jadwal Semester Genap.</p>
                     </div>
                     <div class="category-grid">
                         <div class="category-card">
                             <h3>Kelas Reguler</h3>
-                            <p>Buka dokumen PDF jadwal Semester Genap kelas reguler.</p>
-                            <a href="Kalender1.pdf" class="btn-access" target="_blank">Open</a>
+                            <p>Lihat kalender kegiatan dan jadwal pertemuan Genap kelas reguler.</p>
+                            <a href="#" class="btn-access open-schedule" data-semester="genap" data-category="reguler">Open</a>
                         </div>
                         <div class="category-card">
                             <h3>Kelas IUP</h3>
-                            <p>Buka dokumen PDF jadwal Semester Genap kelas IUP.</p>
-                            <a href="Schedule1.pdf" class="btn-access" target="_blank">Open</a>
+                            <p>Lihat kalender kegiatan dan jadwal pertemuan Genap kelas IUP.</p>
+                            <a href="#" class="btn-access open-schedule" data-semester="genap" data-category="iup">Open</a>
                         </div>
                     </div>
+                </section>
+
+                <!-- HALAMAN LIST SCHEDULE (LAYER BARU) -->
+                <section id="view-schedule-list" class="page-view">
+                    <div class="header-intro">
+                        <button class="btn-back" id="backToScheduleBeranda">&larr; Kembali ke Pilihan Kategori Schedule</button>
+                        <h1 id="scheduleListHeading">Daftar Schedule</h1>
+                        <p id="scheduleListSub">Kalender kegiatan dan rincian pertemuan.</p>
+                    </div>
+                    <div class="module-grid" id="scheduleContainer"></div>
                 </section>
 
                 <!-- 5. PEMINJAMAN ALAT (PRESENSI) -->
@@ -197,13 +207,11 @@
                             <label>Judul</label>
                         </div>
 
-                        <!-- PERBAIKAN: Input Tanggal Tanpa Bentrok Label Floating -->
                         <div class="input-group" style="padding-top: 15px;">
                             <label style="position: static; font-size: 13px; color: #ddd; margin-bottom: 5px; display: block;">Tanggal Peminjaman</label>
                             <input type="date" id="tanggalPinjam" required style="margin-top: 0;">
                         </div>
 
-                        <!-- PERBAIKAN: Jam Mulai & Jam Selesai Sejajar Tanpa Bentrok Label Floating -->
                         <div style="margin-top: 15px;">
                             <label style="font-size: 13px; color: #ddd; margin-bottom: 5px; display: block;">Waktu Peminjaman (Maksimal 2 Jam)</label>
                             <div style="display: flex; gap: 10px; align-items: center;">
